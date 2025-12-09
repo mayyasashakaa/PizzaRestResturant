@@ -1,0 +1,87 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Leaf_Red" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8e15d519-eab3-497d-b483-a5c1caac3ee0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZW1wbG95ZWUgQVMgLDE0MSw3Myw4MDNkMGNiNS1mMjA5LTQ0NmYtOTQ3Yy1mNjBhNTk3ODEwNzk7"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<style name="Title" fontName="Arial" fontSize="26.0" bold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18.0"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12.0" bold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12.0"/>
+	<query language="SQL"><![CDATA[SELECT 
+	"Role", count(*) as EmployeeCount
+FROM employee
+GROUP BY "Role"
+ORDER BY EmployeeCount DESC]]></query>
+	<field name="Role" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Role"/>
+		<property name="com.jaspersoft.studio.field.label" value="Role"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="employeecount" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="employeecount"/>
+		<property name="com.jaspersoft.studio.field.label" value="employeecount"/>
+	</field>
+	<group name="Group1">
+		<expression><![CDATA[$F{Role}]]></expression>
+		<groupHeader>
+			<band height="40">
+				<element kind="textField" uuid="d68ccb36-41b2-4e35-86c2-dc324562ca08" x="47" y="13" width="506" height="24" forecolor="#CC0000" bold="true" style="SubTitle">
+					<expression><![CDATA[$F{Role}]]></expression>
+				</element>
+				<element kind="rectangle" uuid="b9a66a94-77af-4a13-8b04-f7bca7e60ad1" mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="113" splitType="Stretch">
+		<element kind="staticText" uuid="91f5fe7f-a65f-46a3-81ae-30f2d82c45a2" x="64" y="20" width="263" height="33" vTextAlign="Middle" style="Title">
+			<text><![CDATA[Employees Role]]></text>
+		</element>
+		<element kind="staticText" uuid="6931f6fc-c9e8-4cc3-9eec-607a123c87f7" x="100" y="60" width="157" height="22" style="SubTitle">
+			<text><![CDATA[Count Each Role]]></text>
+		</element>
+		<element kind="image" uuid="00b76d9a-b123-4002-9c97-8af16c6880d0" x="340" y="2" width="235" height="111">
+			<expression><![CDATA["C:/Users/HP/Desktop/1c5b9208-e057-4a40-a316-ce05d490cf94_adobe_express.png"]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="92" splitType="Stretch">
+		<element kind="line" uuid="2c4ebb21-8745-45a1-a9ad-477acaac72cb" positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+		<element kind="staticText" uuid="89c1f252-cf7c-4cde-af6b-e246918d03f5" x="0" y="40" width="555" height="15" style="Column header">
+			<text><![CDATA[Total_No_Of_Employees]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f7a370bb-3a5b-4b26-a410-1af8299024c7"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<element kind="line" uuid="ffde0804-90e8-496b-86fb-ee363619f187" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1">
+				<pen lineWidth="0.5" lineColor="#999999"/>
+			</element>
+			<element kind="textField" uuid="b7a16e5c-9ea4-4983-9940-cdd0f6c79260" x="0" y="0" width="555" height="15" style="Detail">
+				<expression><![CDATA[$F{employeecount}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f7a370bb-3a5b-4b26-a410-1af8299024c7"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch">
+		<element kind="line" uuid="30093aa1-3dd7-4eea-9cc9-e183637af8f4" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="20" splitType="Stretch">
+		<element kind="textField" uuid="c9e9a989-76ae-4c92-a08c-dba3c3185f04" x="433" y="0" width="80" height="20" fontSize="10.0" bold="false" hTextAlign="Right" style="Column header">
+			<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+		</element>
+		<element kind="textField" uuid="736cac2d-8f9a-48bb-b4e7-09302ce0e313" x="513" y="0" width="40" height="20" fontSize="10.0" evaluationTime="Report" bold="false" style="Column header">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="c49bc611-71b3-4860-8112-76288860b48d" x="0" y="0" width="197" height="20" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" style="Column header">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
+</jasperReport>

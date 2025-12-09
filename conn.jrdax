@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl">
+	<name>conn</name>
+	<classpath>C:\Program Files (x86)\PostgreSQL\pgJDBC\postgresql-42.7.2.jar</classpath>
+	<driver>org.postgresql.Driver</driver>
+	<username>postgres</username>
+	<password>11320045731</password>
+	<url>jdbc:postgresql://localhost:5432/Pizzeria</url>
+	<database></database>
+	<savePassword>true</savePassword>
+	<serverAddress></serverAddress>
+</jdbcDataAdapter>

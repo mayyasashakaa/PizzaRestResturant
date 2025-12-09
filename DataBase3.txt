@@ -1,0 +1,127 @@
+
+
+
+-- Customer Table
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    PhoneNumber VARCHAR(15) NOT NULL,
+    EmailAddress VARCHAR(100),
+    Address varchar(30) NOT NULL 
+    
+);
+
+-- Pizza Table
+CREATE TABLE Pizza (
+    PizzaID INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Size VARCHAR(10) CHECK (Size IN ('Small', 'Medium', 'Large')), 
+    BasePrice DECIMAL(5, 2) NOT NULL,
+    Description TEXT
+);
+
+-- Employee Table
+CREATE TABLE Employee (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Role VARCHAR(50),  
+    PhoneNumber VARCHAR(15),
+    HireDate DATE
+);
+
+-- Menu Table
+CREATE TABLE Menu (
+    MenuID INT PRIMARY KEY,
+    PizzaID INT,
+    Availability BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (PizzaID) REFERENCES Pizza(PizzaID)
+);
+
+-- Order Table
+CREATE TABLE Order_ (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate TIMESTAMP NOT NULL,
+    DeliveryDateTime TIMESTAMP,
+    OrderType VARCHAR(20) CHECK (OrderType IN ('Dine-In', 'Takeaway', 'Delivery')),  
+    TotalAmount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+-- Payment Table
+CREATE TABLE Payment (
+    PaymentID INT PRIMARY KEY,
+    OrderID INT,
+    PaymentType VARCHAR(20) CHECK (PaymentType IN ('Cash', 'Credit Card', 'Debit Card')),
+    AmountPaid DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES "Order"(OrderID)
+);
+
+-- Delivery Table
+CREATE TABLE Delivery (
+    DeliveryID INT PRIMARY KEY,
+    OrderID INT,
+    DeliveryPersonID INT,
+    DeliveryTime TIMESTAMP,
+    DeliveryStatus VARCHAR(20) CHECK (DeliveryStatus IN ('On the Way', 'Delivered')),
+    FOREIGN KEY (OrderID) REFERENCES "Order"(OrderID),
+    FOREIGN KEY (DeliveryPersonID) REFERENCES Employee(EmployeeID)
+);
+
+
+
+INSERT INTO customer (CustomerID, Name, PhoneNumber, EmailAddress, Address) VALUES
+(1, 'mayyasa', '555-1234', 'mayyasa@gmail.com', 'ateba iskan'),
+(2, 'hala', '555-5678', 'hala@gmail.com', 'rafidia'),
+(3, 'omar', '555-2345', 'omar@gmail.com', 'quds street'),
+(4, 'tasneem', '555-8765', 'tasneem@gmail.com', 'ateba iskan'),
+(5, 'hala', '555-3456', 'hala@gmail.com', 'anabta');
+
+
+INSERT INTO pizza (PizzaID, Name, Size, BasePrice, Description) VALUES
+(201, 'Margherita', 'Medium', 40.00, 'Classic pizza with tomato sauce, mozzarella cheese, and basil.'),
+(202, 'Pepperoni', 'Large', 55.00, 'Pepperoni slices with mozzarella and tomato sauce.'),
+(203, 'Veggie Delight', 'Small', 25.00, 'Topped with bell peppers, onions, mushrooms, and olives.'),
+(204, 'BBQ Chicken', 'Medium', 45.00, 'Grilled chicken with BBQ sauce and red onions.'),
+(205, 'Hawaiian', 'Large', 55.00, 'Ham and pineapple on mozzarella and tomato base.');
+
+
+INSERT INTO employee (EmployeeID, Name, Role, PhoneNumber, HireDate) VALUES
+(301, 'Eyad', 'Chef', '555-6789', '2024-06-05'),
+(302, 'Imad', 'Delivery Person', '555-7890', '2024-06-10'),
+(303, 'Ahmad', 'Cashier', '555-8901', '2024-06-09'),
+(304, 'Eyad', 'Manager', '555-9012', '2014-06-05'),
+(305, 'Loay', 'Cleaner', '555-0123', '2024-06-07');
+
+
+INSERT INTO menu (MenuID, PizzaID, Availability) VALUES
+(401, 201, true),
+(402, 202, true),
+(403, 203, false),
+(404, 204, true),
+(405, 205, true);
+
+INSERT INTO order_ (OrderID, CustomerID, OrderDate, DeliveryDateTime, OrderType, TotalAmount) VALUES
+(501, 1, '2024-10-10 12:00:00', '2024-10-10 12:30:00', 'Delivery', 50.00),
+(502, 2, '2024-10-11 18:00:00', '2024-10-11 18:45:00', 'Takeaway', 45.00),
+(503, 3, '2024-10-12 14:00:00', '2024-10-12 14:45:00', 'Dine-In', 25.00),
+(504, 4, '2024-10-13 16:00:00', '2024-10-13 16:30:00', 'Delivery', 55.00),
+(505, 5, '2024-10-14 19:00:00', '2024-10-14 19:45:00', 'Dine-In', 45.00);
+
+INSERT INTO payment (PaymentID, OrderID, PaymentType ,AmountPaid) VALUES
+(601, 501, 'Credit Card', 50.00),
+(602, 502, 'Cash', 45.00),
+(603, 503, 'Debit Card', 25.00),
+(604, 504, 'Credit Card', 55.00),
+(605, 505, 'Cash', 55.00);
+
+
+
+
+INSERT INTO delivery (DeliveryID, OrderID, DeliveryPersonID, DeliveryTime, DeliveryStatus) VALUES
+(701, 501, 302, '2024-10-10 12:30:00', 'Delivered'),
+(702, 502, 305, '2024-10-11 18:45:00', 'Delivered'),
+(703, 504, 302, '2024-10-13 16:30:00', 'On the Way'),
+(704, 504, 305, '2024-10-13 16:30:00', 'Delivered'),
+(705, 501, 305, '2024-10-14 19:45:00', 'On the Way');
+
